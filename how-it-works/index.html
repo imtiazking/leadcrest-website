@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — LEADCREST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0C0E0F;
+  --ink-2: #141618;
+  --ink-3: #1D2023;
+  --gold: #B8924A;
+  --gold-light: #D4AC6A;
+  --white: #FDFCF9;
+  --text: #DDD8CE;
+  --muted: #8B877F;
+  --dim: #555150;
+  --serif: 'Syne', system-ui, sans-serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --border: rgba(184,146,74,0.18);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--ink); color: var(--text); overflow-x: hidden; line-height: 1.65; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 6%;
+  background: rgba(12,14,15,0.93);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--white); letter-spacing: 0.04em; text-decoration: none; }
+.nav-logo span { color: var(--gold); }
+.back-link { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.back-link:hover { color: var(--gold); }
+.btn-nav { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 0.6rem 1.5rem; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s; display: inline-block; }
+.btn-nav:hover { background: var(--gold-light); }
+
+/* PAGE HERO */
+.page-hero {
+  padding: 11rem 6% 6rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(184,146,74,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(184,146,74,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 10%, transparent 80%);
+}
+.hero-glow { position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 500px; pointer-events: none; background: radial-gradient(ellipse, rgba(184,146,74,0.08) 0%, transparent 65%); }
+.eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); padding: 0.5rem 1.2rem; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.6s 0.1s forwards; }
+.eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4.8rem); font-weight: 700; color: var(--white); line-height: 1.1; max-width: 800px; margin: 0 auto 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.25s forwards; }
+.page-hero h1 em { color: var(--gold); font-style: italic; }
+.page-hero p { font-size: 1.08rem; font-weight: 300; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.8; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.gold-line { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,146,74,0.3) 30%, rgba(184,146,74,0.3) 70%, transparent); }
+
+/* SECTION COMMON */
+.section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.7rem; }
+.section-label::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+.section-title { font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 3rem); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 0.8rem; }
+.section-title em { color: var(--gold); font-style: italic; }
+
+/* TIMELINE */
+.timeline-section { padding: 7rem 6%; max-width: 1100px; margin: 0 auto; }
+.timeline { margin-top: 5rem; display: flex; flex-direction: column; position: relative; }
+.timeline::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), rgba(184,146,74,0.08)); }
+.timeline-item { display: grid; grid-template-columns: 60px 1fr; gap: 2.5rem; padding-bottom: 4.5rem; position: relative; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot { width: 56px; height: 56px; border: 1px solid var(--gold); background: var(--ink-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; }
+.timeline-num { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+.timeline-body { padding-top: 0.9rem; }
+.timeline-title { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; color: var(--white); margin-bottom: 0.9rem; line-height: 1.2; }
+.timeline-text { font-size: 0.97rem; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 660px; margin-bottom: 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
+.chip { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; color: var(--gold); border: 1px solid var(--border); background: rgba(184,146,74,0.06); padding: 0.38rem 0.85rem; }
+
+/* 14 SIGNALS */
+.signals-section { background: var(--ink-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 7rem 6%; }
+.signals-inner { max-width: 1100px; margin: 0 auto; }
+.signals-grid { margin-top: 3.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.signal-card { background: var(--ink-2); padding: 1.8rem 1.5rem; transition: background 0.2s; }
+.signal-card:hover { background: var(--ink-3); }
+.signal-num { font-family: var(--serif); font-size: 1.9rem; font-weight: 700; color: rgba(184,146,74,0.2); display: block; margin-bottom: 0.4rem; }
+.signal-name { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+.signal-desc { font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+/* VERIFICATION FLOW */
+.verify-section { padding: 7rem 6%; }
+.verify-inner { max-width: 1100px; margin: 0 auto; }
+.verify-flow { margin-top: 4rem; display: grid; grid-template-columns: repeat(5, 1fr); }
+.verify-step { text-align: center; padding: 2.5rem 1rem; border: 1px solid var(--border); border-right: none; background: var(--ink-2); transition: background 0.2s; position: relative; }
+.verify-step:last-child { border-right: 1px solid var(--border); }
+.verify-step:hover { background: var(--ink-3); }
+.verify-step::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 0.9rem; z-index: 2; background: var(--ink); padding: 0 3px; }
+.verify-step:last-child::after { display: none; }
+.verify-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+.verify-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+.verify-desc { font-size: 0.76rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+/* DOSSIER */
+.dossier-section { background: var(--ink-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 7rem 6%; }
+.dossier-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.dossier-card { background: var(--ink); border: 1px solid var(--border); padding: 2.5rem; position: relative; }
+.dossier-card::before { content: 'SAMPLE LEAD DOSSIER'; position: absolute; top: -1px; left: 1.5rem; font-size: 0.6rem; letter-spacing: 0.2em; background: var(--gold); color: var(--ink); font-weight: 700; padding: 0.25rem 0.8rem; }
+.dossier-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.8rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.dossier-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--white); }
+.score-val { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; display: block; }
+.score-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.dossier-row { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; border-bottom: 1px solid rgba(184,146,74,0.07); font-size: 0.88rem; }
+.dossier-row:last-child { border-bottom: none; }
+.dossier-key { color: var(--muted); }
+.dossier-val { color: var(--text); font-weight: 500; text-align: right; }
+.dossier-val.gold { color: var(--gold); }
+.dossier-val.green { color: #6DBF8A; }
+.dossier-note { margin-top: 1.5rem; padding: 1rem 1.2rem; background: rgba(184,146,74,0.06); border-left: 2px solid var(--gold); font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.7; font-style: italic; }
+
+/* GUARANTEE */
+.guarantee-section { padding: 7rem 6%; text-align: center; }
+.guarantee-inner { max-width: 720px; margin: 0 auto; }
+.guarantee-box { border: 1px solid var(--border); padding: 3.5rem; margin-top: 3rem; background: var(--ink-2); }
+.g-title { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+.g-title em { color: var(--gold); font-style: italic; }
+.g-text { font-size: 0.97rem; font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 1.2rem; }
+.g-stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2rem; }
+.g-stat-num { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; color: var(--gold); display: block; line-height: 1; }
+.g-stat-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; display: block; }
+
+/* FINAL CTA */
+.final-cta { background: var(--ink-2); border-top: 1px solid var(--border); padding: 7rem 6%; text-align: center; }
+.btn-primary { display: inline-block; font-family: var(--sans); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 1.1rem 2.8rem; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(184,146,74,0.25); }
+.btn-ghost { display: inline-block; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; color: var(--text); background: transparent; padding: 1.1rem 2.4rem; border: 1px solid var(--border); cursor: pointer; text-decoration: none; margin-left: 1rem; transition: border-color 0.2s, color 0.2s; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* FOOTER */
+footer { background: var(--ink); border-top: 1px solid var(--border); padding: 2.5rem 6%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--white); text-decoration: none; }
+.footer-logo span { color: var(--gold); }
+.footer-copy { font-size: 0.75rem; color: var(--dim); }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  .dossier-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .verify-flow { grid-template-columns: 1fr 1fr; }
+  .verify-step { border-right: 1px solid var(--border); border-bottom: none; }
+  .verify-step::after { display: none; }
+  .timeline::before { left: 27px; }
+}
+@media (max-width: 560px) {
+  .verify-flow { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/"><span>LEAD</span>CREST</a>
+  <a class="back-link" href="/">← Back to Home</a>
+  <a class="btn-nav" href="echoleadsgroup.html#contact">Get Qualified Leads</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="eyebrow">The LEADCREST Process</div>
+  <h1>From stranger to<br><em>signed buyer</em> — here's how.</h1>
+  <p>Every lead that reaches your desk has already been sourced, scored, called, and verified. This is what happens before you even pick up the phone.</p>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <p class="section-label">The Three-Step Process</p>
+  <h2 class="section-title">Simple for you.<br><em>Rigorous behind the scenes.</em></h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"><span class="timeline-num">01</span></div>
+      <div class="timeline-body">
+        <div class="timeline-title">You Define Your Ideal Buyer</div>
+        <p class="timeline-text">We start with a short onboarding call where you tell us exactly who you want. Budget range, preferred locations (Downtown, Palm, Business Bay, JVC), property type — off-plan or ready, villa or apartment — preferred nationality mix, and timeline urgency. The more specific you are, the tighter we target.</p>
+        <p class="timeline-text">This brief drives every sourcing and verification decision we make. It is live for the duration of your engagement and updated any time your focus shifts — new project launch, seasonal push, portfolio change. You stay in control without doing any of the legwork.</p>
+        <div class="chips">
+          <span class="chip">10-min onboarding call</span>
+          <span class="chip">Custom targeting brief</span>
+          <span class="chip">Location preferences</span>
+          <span class="chip">Budget range filters</span>
+          <span class="chip">Property type</span>
+          <span class="chip">Nationality preferences</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><span class="timeline-num">02</span></div>
+      <div class="timeline-body">
+        <div class="timeline-title">We Source, Score & Verify</div>
+        <p class="timeline-text">Our system continuously monitors 14 behavioural and demographic signals across Dubai property portals, relocation platforms, expat financial communities, and our own inbound lead network. Every prospect is scored automatically — only those above our intent threshold are passed to the human verification team.</p>
+        <p class="timeline-text">A trained LEADCREST qualifier then calls every shortlisted prospect. They confirm name, budget, timeline, current location, reason for buying, and availability to view. If the prospect hesitates, misrepresents budget, or fails to match your brief — they are rejected. You only see leads that passed every filter.</p>
+        <p class="timeline-text">We also independently verify identity details — passport reference and UAE visa or entry status — before clearing any lead for delivery. Over 60% of raw enquiries are filtered out before you ever see them.</p>
+        <div class="chips">
+          <span class="chip">14 intent signals scored</span>
+          <span class="chip">Human verification call</span>
+          <span class="chip">Passport verified</span>
+          <span class="chip">Budget cross-checked</span>
+          <span class="chip">Visa status confirmed</span>
+          <span class="chip">60%+ rejection rate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><span class="timeline-num">03</span></div>
+      <div class="timeline-body">
+        <div class="timeline-title">You Receive the Dossier & Close</div>
+        <p class="timeline-text">Verified leads arrive in your inbox or CRM within 48 hours — each one with a full buyer dossier. Name, contact number, email, confirmed budget, property preferences, timeline, intent score, and a plain-English summary of our verification call including what the buyer said about their motivation and requirements.</p>
+        <p class="timeline-text">There is no cold calling from your end. You are reaching someone who has already confirmed they want to buy Dubai property, spoken to our team about it, and is expecting an agent to follow up. Your first call is warm. Your only job is to close.</p>
+        <div class="chips">
+          <span class="chip">Full lead dossier</span>
+          <span class="chip">Delivered in 48 hours</span>
+          <span class="chip">CRM or email delivery</span>
+          <span class="chip">Verification call summary</span>
+          <span class="chip">100% exclusive to you</span>
+          <span class="chip">Warm first contact</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gold-line"></div>
+
+<!-- 14 SIGNALS -->
+<section class="signals-section">
+  <div class="signals-inner">
+    <p class="section-label">Intent Scoring</p>
+    <h2 class="section-title">The 14 signals we track<br><em>before you see a single name.</em></h2>
+
+    <div class="signals-grid">
+      <div class="signal-card">
+        <span class="signal-num">01</span>
+        <div class="signal-name">Property Portal Activity</div>
+        <p class="signal-desc">Frequency and recency of Dubai property searches on Bayut, Property Finder, and Dubizzle.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">02</span>
+        <div class="signal-name">Search Query Specificity</div>
+        <p class="signal-desc">Generic searches score low. Area-specific, budget-specific queries signal serious intent.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">03</span>
+        <div class="signal-name">Relocation Forum Engagement</div>
+        <p class="signal-desc">Activity on expat communities discussing Dubai housing, visa options, and lifestyle.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">04</span>
+        <div class="signal-name">Mortgage Pre-Approval Status</div>
+        <p class="signal-desc">Prospects who have sought mortgage advice or pre-approval are significantly higher intent.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">05</span>
+        <div class="signal-name">Inbound Lead Form Submission</div>
+        <p class="signal-desc">Prospects who voluntarily submitted interest via our own network and partner channels.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">06</span>
+        <div class="signal-name">Visa & Residency Status</div>
+        <p class="signal-desc">Whether the prospect holds a UAE visa, is applying, or is visiting with purchase intent.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">07</span>
+        <div class="signal-name">Stated Purchase Timeline</div>
+        <p class="signal-desc">Buyers indicating a decision window under 90 days are scored significantly higher.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">08</span>
+        <div class="signal-name">Device & Engagement Depth</div>
+        <p class="signal-desc">Time on listing pages, saved searches, and return visit frequency on property platforms.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">09</span>
+        <div class="signal-name">Financial Content Consumption</div>
+        <p class="signal-desc">Engagement with content about ROI, Dubai investment returns, and Golden Visa eligibility.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">10</span>
+        <div class="signal-name">Off-Plan vs Ready Interest</div>
+        <p class="signal-desc">Specific intent type helps us match buyers to the right agency and development portfolio.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">11</span>
+        <div class="signal-name">Country of Origin</div>
+        <p class="signal-desc">Nationality aligns with buying behaviour patterns, financing preferences, and visa eligibility.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">12</span>
+        <div class="signal-name">Income Indicator Signals</div>
+        <p class="signal-desc">Job title, industry, and employer data used to cross-validate stated budget plausibility.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">13</span>
+        <div class="signal-name">Communication Responsiveness</div>
+        <p class="signal-desc">Response rate to initial outreach and speed of engagement with our qualification team.</p>
+      </div>
+      <div class="signal-card">
+        <span class="signal-num">14</span>
+        <div class="signal-name">Repeat Search Behaviour</div>
+        <p class="signal-desc">Prospects returning to the same listings or refining searches over multiple sessions show committed intent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFICATION FLOW -->
+<section class="verify-section">
+  <div class="verify-inner">
+    <p class="section-label">Verification Pipeline</p>
+    <h2 class="section-title">Five filters stand between<br><em>an enquiry and your inbox.</em></h2>
+    <div class="verify-flow">
+      <div class="verify-step">
+        <span class="verify-icon">📡</span>
+        <div class="verify-label">Signal Capture</div>
+        <p class="verify-desc">Prospect detected across monitored channels</p>
+      </div>
+      <div class="verify-step">
+        <span class="verify-icon">🤖</span>
+        <div class="verify-label">AI Scoring</div>
+        <p class="verify-desc">14-signal intent score calculated automatically</p>
+      </div>
+      <div class="verify-step">
+        <span class="verify-icon">📞</span>
+        <div class="verify-label">Human Call</div>
+        <p class="verify-desc">Qualifier speaks directly with the prospect</p>
+      </div>
+      <div class="verify-step">
+        <span class="verify-icon">🪪</span>
+        <div class="verify-label">Identity Check</div>
+        <p class="verify-desc">Passport and visa status independently confirmed</p>
+      </div>
+      <div class="verify-step">
+        <span class="verify-icon">📬</span>
+        <div class="verify-label">Delivery</div>
+        <p class="verify-desc">Full dossier sent to your CRM within 48hrs</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE DOSSIER -->
+<section class="dossier-section">
+  <div class="dossier-inner">
+    <div>
+      <p class="section-label">What You Receive</p>
+      <h2 class="section-title">Every lead comes with<br><em>a full buyer dossier.</em></h2>
+      <p style="font-size:0.97rem;font-weight:300;color:var(--muted);line-height:1.85;margin-top:1.2rem;margin-bottom:1.4rem;">No spreadsheet rows. No first names and phone numbers. Each lead is a complete profile built from every sourcing, scoring, and verification stage — everything you need to make the first call confident and informed.</p>
+      <p style="font-size:0.97rem;font-weight:300;color:var(--muted);line-height:1.85;margin-bottom:1.4rem;">You also receive a written summary of the verification call — what the buyer said about their motivations, any specific requirements they mentioned, and their response to being contacted by an agent.</p>
+      <p style="font-size:0.97rem;font-weight:300;color:var(--muted);line-height:1.85;">Every dossier is yours exclusively. The moment it is delivered, that profile is permanently removed from our inventory and will never be sold to another agency.</p>
+    </div>
+
+    <div class="dossier-card">
+      <div class="dossier-header">
+        <div>
+          <div class="dossier-name">Rajesh M.</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:0.3rem;letter-spacing:0.06em;">Indian National · Dubai Visitor Visa</div>
+        </div>
+        <div style="text-align:center;">
+          <span class="score-val">94</span>
+          <span class="score-label">Intent Score</span>
+        </div>
+      </div>
+      <div class="dossier-row"><span class="dossier-key">Confirmed Budget</span><span class="dossier-val gold">AED 3.2M – 4.5M</span></div>
+      <div class="dossier-row"><span class="dossier-key">Target Area</span><span class="dossier-val">Downtown / DIFC</span></div>
+      <div class="dossier-row"><span class="dossier-key">Property Type</span><span class="dossier-val">Off-Plan, 2–3 Bed</span></div>
+      <div class="dossier-row"><span class="dossier-key">Purchase Timeline</span><span class="dossier-val">Within 60 days</span></div>
+      <div class="dossier-row"><span class="dossier-key">Motivation</span><span class="dossier-val">Investment + Golden Visa</span></div>
+      <div class="dossier-row"><span class="dossier-key">Identity Verified</span><span class="dossier-val green">✓ Confirmed</span></div>
+      <div class="dossier-row"><span class="dossier-key">Mortgage Pre-Approval</span><span class="dossier-val green">✓ In Progress</span></div>
+      <div class="dossier-row"><span class="dossier-key">Viewing Availability</span><span class="dossier-val">This weekend / flexible</span></div>
+      <div class="dossier-row"><span class="dossier-key">Contact</span><span class="dossier-val">+971 5X XXX XXXX</span></div>
+      <div class="dossier-note">"Spoke for 12 minutes. Rajesh is relocating from Bangalore for a tech role in DIFC. Wants to buy before visa activates to qualify for the Golden Visa threshold. Very engaged, asked about payment plans. Expects an agent call within 2–3 days."</div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="guarantee-section">
+  <div class="guarantee-inner">
+    <p class="section-label" style="justify-content:center;">Our Promise</p>
+    <h2 class="section-title" style="text-align:center;">We stand behind<br><em>every single lead.</em></h2>
+    <div class="guarantee-box">
+      <div class="g-title">The 30-Day <em>Quality Guarantee</em></div>
+      <p class="g-text">If any lead we deliver fails to match the verified profile — uncontactable after three documented attempts, misrepresented budget, or incorrect identity details — we replace it within 5 business days, free of charge. No forms, no disputes. You flag it. We fix it.</p>
+      <p class="g-text" style="margin-bottom:0;">This guarantee exists because our business model only works if your pipeline converts. We are not a one-time transaction — we are a long-term revenue partner. Your success is the only metric that matters to us.</p>
+      <div class="g-stats">
+        <div><span class="g-stat-num">78%</span><span class="g-stat-label">Lead-to-Viewing Rate</span></div>
+        <div><span class="g-stat-num">&lt;3%</span><span class="g-stat-label">Replacement Claims</span></div>
+        <div><span class="g-stat-num">94%</span><span class="g-stat-label">Identity Verified</span></div>
+        <div><span class="g-stat-num">5 days</span><span class="g-stat-label">Max Replacement Time</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <p class="section-label" style="justify-content:center;">Ready to Start?</p>
+  <h2 class="section-title" style="text-align:center;max-width:600px;margin:0 auto 1.2rem;">You've seen the process.<br><em>Now put it to work.</em></h2>
+  <p style="font-size:1rem;font-weight:300;color:var(--muted);max-width:480px;margin:0 auto 2.5rem;text-align:center;line-height:1.8;">Your first qualified buyer lead can be in your inbox within 48 hours. No lock-in. No setup fees. Just pipeline.</p>
+  <a class="btn-primary" href="echoleadsgroup.html#contact">Get Qualified Buyer Leads</a>
+  <a class="btn-ghost" href="/">Back to Home</a>
+  <p style="margin-top:1.6rem;font-size:0.75rem;color:var(--dim);">No contracts &nbsp;·&nbsp; 30-day quality guarantee &nbsp;·&nbsp; 48hr delivery</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="/"><span>LEAD</span>CREST</a>
+  <p class="footer-copy">© 2025 LEADCREST. Dubai, UAE.</p>
+</footer>
+
+</body>
+</html>
