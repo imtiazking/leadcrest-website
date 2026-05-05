@@ -1,0 +1,24 @@
+{
+  "name": "leadcrest-website",
+  "version": "1.0.0",
+  "description": "Leadcrest Group - Dubai Real Estate Lead Generation Platform",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "leads",
+    "real-estate",
+    "dubai",
+    "lead-generation",
+    "buyers"
+  ],
+  "author": "Leadcrest Group",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/leadcrest-website"
+  }
+}
