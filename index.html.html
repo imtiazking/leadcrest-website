@@ -1125,21 +1125,22 @@ footer {
   <h2 class="section-title" style="text-align:center;">Your next deal is<br><em>already waiting.</em></h2>
   <p class="section-body" style="text-align:center;margin:0 auto 3rem;">Stop spending your commission on unverified portals and cold lists. Leadcrest Group puts serious, ready-to-buy clients directly into your pipeline. this week.</p>
 
-  <div style="display:flex;flex-direction:column;align-items:center;gap:0.9rem;max-width:420px;margin:0 auto;">
-    <input type="text" placeholder="Your Full Name" style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">>
-    <input type="text" placeholder="Agency / Company Name" style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
-    <input type="tel" placeholder="WhatsApp / Phone Number" style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
-    <select style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:0.9rem;outline:none;appearance:none;">
+  <form id="contactForm" style="display:flex;flex-direction:column;align-items:center;gap:0.9rem;max-width:420px;margin:0 auto;">
+    <input type="text" name="Name" placeholder="Your Full Name" required style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+    <input type="text" name="Email" placeholder="Your Email Address" required style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+    <input type="text" name="Company" placeholder="Agency / Company Name" required style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+    <input type="tel" name="Phone" placeholder="WhatsApp / Phone Number" required style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+    <select name="Lead Volume" required style="width:100%;padding:0.8rem 1rem;background:var(--ink-3);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:0.9rem;outline:none;appearance:none;">
       <option value="" disabled selected>Monthly Lead Volume Needed</option>
       <option>1–5 leads / month</option>
       <option>6–20 leads / month</option>
       <option>21–50 leads / month</option>
       <option>50+ leads / month</option>
     </select>
-    <button class="btn-primary" style="width:100%;padding:0.95rem;font-size:0.82rem;" onclick="this.textContent='✓ Request Submitted. We\'ll be in touch within 2 hours';this.style.background='#4a7c59';this.style.color='#fff';">
+    <button type="submit" class="btn-primary" style="width:100%;padding:0.95rem;font-size:0.82rem;">
       Get Qualified Buyer Leads →
     </button>
-  </div>
+  </form>
 
   <p class="cta-guarantee">
     <strong>No contracts. No setup fees.</strong> &nbsp;·&nbsp; We respond within 2 business hours &nbsp;·&nbsp; <strong>30-day quality guarantee on every lead</strong>
@@ -1173,6 +1174,40 @@ function toggleFAQ(btn) {
     icon.classList.add('open');
   }
 }
+
+// Contact Form Submission to Zapier
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData);
+  
+  // Send to Zapier webhook
+  fetch('https://hooks.zapier.com/hooks/catch/27493359/4y2c7le/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    // Show success message
+    const button = this.querySelector('button[type="submit"]');
+    button.textContent = '✓ Request Submitted. We\'ll be in touch within 2 hours';
+    button.style.background = '#4a7c59';
+    button.style.color = '#fff';
+    button.disabled = true;
+    
+    // Reset form
+    this.reset();
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('There was an error submitting your form. Please try again.');
+  });
+});
+</script>
+
 <script src="//code.tidio.co/7soxp8ccwreuzgvfifobev2e3b1932ij.js" async></script>
 </body>
 </html>
