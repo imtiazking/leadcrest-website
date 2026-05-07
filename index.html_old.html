@@ -1185,7 +1185,9 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   // Send to Zapier webhook
   fetch('https://hooks.zapier.com/hooks/catch/27493359/4y2c7le/', {
     method: 'POST',
-    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data)
   })
   .then(response => {
@@ -1201,13 +1203,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   })
   .catch(error => {
     console.error('Error:', error);
-    // Still show success even if there's an error, since webhook might have received it
-    const button = this.querySelector('button[type="submit"]');
-    button.textContent = '✓ Request Submitted. We\'ll be in touch within 2 hours';
-    button.style.background = '#4a7c59';
-    button.style.color = '#fff';
-    button.disabled = true;
-    this.reset();
+    alert('There was an error submitting your form. Please try again.');
   });
 });
 </script>
